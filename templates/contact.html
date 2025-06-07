@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Contact - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/contact-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Contact Me</h1>
+                    <span class="subheading">용건이 있다면 연락주세요.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>제 개인메일로 메시지가 전송됩니다.</p>
+                <div class="my-5">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form id="contactForm" method="POST" action="{{ url_for('contact') }}">
+                        <div class="form-floating">
+                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." required />
+                            <label for="name">Name</label>
+                            <div class="invalid-feedback">A name is required.</div>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." required />
+                            <label for="email">Email address</label>
+                            <div class="invalid-feedback">An email is required.</div>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="phone" name="phone" type="tel" placeholder="Enter your phone number..." required />
+                            <label for="phone">Phone Number</label>
+                            <div class="invalid-feedback">A phone number is required.</div>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem" required></textarea>
+                            <label for="message">Message</label>
+                            <div class="invalid-feedback">A message is required.</div>
+                        </div>
+                        <br />
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage">
+                            <div class="text-center text-danger mb-3">Error sending message!</div>
+                        </div>
+                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

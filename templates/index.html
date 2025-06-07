@@ -1,201 +1,176 @@
-<!DOCTYPE HTML>
-<!--
-	Big Picture by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>hyeonlee.net</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
-	</head>
-	<body class="is-preload">
+{% extends "base.html" %}
+{% block title %}Home - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+                <div class="site-heading">
+                    <h1>Welcome</h1>
+                    <span class="subheading">환영합니다. 둘러보세요.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-5">
+    <div class="row justify-content-center align-items-stretch">
+        <!-- About 카드 -->
+        <div class="col-12 col-lg-4 mb-4 d-flex">
+            <a href="{{ url_for('about') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img"
+                    style="background-image:url('{{ url_for('static', filename='assets/img/about-icon.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">About</h3>
+                        <p>포트폴리오, 경력, 기술스택</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Post 카드 -->
+        <div class="col-12 col-lg-4 mb-4 d-flex">
+            <a href="{{ url_for('postlist') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img"
+                    style="background-image:url('{{ url_for('static', filename='assets/img/postlist-icon.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">Post</h3>
+                        <p>블로그, 기록, 생각</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Contact 카드 -->
+        <div class="col-12 col-lg-4 mb-4 d-flex">
+            <a href="{{ url_for('contact') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img"
+                    style="background-image:url('{{ url_for('static', filename='assets/img/contact-icon.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">Contact</h3>
+                        <p>문의, 연락, 네트워크</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Hyeon's Portfolio</h1>
-				<nav>
-					<ul>
-						<li><a href="#intro">Intro</a></li>
-						<li><a href="#one">Who I Am</a></li>
-						<li><a href="#two">What I Do</a></li> 
-						<!-- 보유역량 로드맵 어디에 넣을지 고민 -->
-						<li><a href="#work">My Work</a></li>
-						<li><a href="#daily">My Daily</a></li>
-						<li><a href="#thoughts">My Thoughts</a></li>
-					</ul>
-				</nav>
-			</header>
+{% block head_extra %}
+<style>
+.menu-card {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    height: 25vw;
+    max-height: 330px;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    display: flex;
+    align-items: stretch;
+    margin: 0 0.7rem;
+    background: #eee;
+    /* 처음엔 흐릿하게 등장 */
+    opacity: 0;
+    transform: translateY(48px) scale(0.97);
+    transition:
+        box-shadow 0.26s cubic-bezier(.37,0,.63,1),
+        transform 0.5s cubic-bezier(.37,0,.63,1),
+        opacity 0.7s cubic-bezier(.42,0,.58,1);
+}
+.menu-card.visible {
+    opacity: 1;
+    transform: none;
+}
+.menu-card:hover,
+.menu-card:focus,
+.menu-card.visible:hover {
+    box-shadow: 0 18px 42px rgba(0,0,0,0.17);
+    transform: translateY(-7px) scale(1.025);
+}
+.menu-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
+    /* 흐릿+어둡게+흑백 */
+    filter: blur(3.5px) brightness(0.62) grayscale(0.14);
+    transition: filter 0.55s cubic-bezier(.41,0,.69,1);
+}
+/* 활성화될 때 선명하게 */
+.menu-card:hover .menu-img,
+.menu-card:focus .menu-img,
+.menu-card.visible .menu-img {
+    filter: blur(0) brightness(1.03) grayscale(0);
+}
+/* 오버레이+글씨 */
+.menu-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.42);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    /* 글씨도 투명하게 시작 */
+    opacity: 0;
+    transition: background 0.33s, opacity 0.58s cubic-bezier(.33,0,.67,1);
+}
+.menu-card.visible .menu-overlay,
+.menu-card:hover .menu-overlay,
+.menu-card:focus .menu-overlay {
+    background: rgba(0,0,0,0.22);
+    opacity: 1;
+    pointer-events: auto;
+}
+/* 텍스트 등장 애니메이션 */
+.menu-text {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.34);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.56s cubic-bezier(.45,0,.55,1), transform 0.56s cubic-bezier(.45,0,.55,1);
+}
+.menu-card.visible .menu-text,
+.menu-card:hover .menu-text,
+.menu-card:focus .menu-text {
+    opacity: 1;
+    transform: none;
+}
+.menu-overlay h3 { font-size: 2.0rem; margin-bottom: 0.7rem; font-weight: 700; }
+.menu-overlay p { font-size: 1.13rem; margin-bottom:0; }
+@media (max-width: 991px) {
+    .menu-card { height: 38vw; min-height: 120px; max-height: 210px; margin-bottom: 2rem;}
+}
+@media (max-width: 600px) {
+    .menu-card { height: 44vw; min-height: 110px; max-height: 160px;}
+    .menu-overlay h3 { font-size: 1.28rem;}
+    .menu-overlay p { font-size: 0.92rem;}
+}
+</style>
+{% endblock %}
 
-		<!-- Intro -->
-			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content">
-					<header>
-						<h2>Hey.</h2>
-					</header>
-					<p>Welcome to <strong>hyeonlee.net</strong></p>
-					<footer>
-						<a href="#one" class="button style2 down">More</a>
-					</footer>
-				</div>
-			</section>
-
-		<!-- One -->
-			<section id="one" class="main style2 left dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>Who I Am</h2>
-					</header>
-					<p>1989년 서울에서 태어나 강릉에서 유년기를 보냈습니다.초, 중, 고는 모두 양천구에서 보냈습니다. 광진구에 있는 대학교 산업공학 학사 졸업했습니다.<br>
-						현재는 21년생 쌍둥이 아들/딸 2명의 자식이 있습니다. 아내<s>는 1명입니다.</s> 를 사랑합니다. 아내와 쌍둥이 자식들을 만나기 전엔 아버지, 어머니, 형 각 1명씩 총 4명이 함께 살았습니다.<br>
-						ISTJ입니다. 혼자 있을 때 더 행복할 때가 있습니다. 멘탈관리가 필요할 땐 자기개발서나 유익한 유튜브를 찾아보며 정신수양을 하며 극복하곤 합니다. 유소년기 낭만이 아직 살아있습니다. 드래곤볼을 시작으로 원피스, 나루토, 블리치, 은혼, 귀멸의칼날, 강철의연금술사, 랑그릿사, 창세기전 등의 주요 케릭터가 저의 낭만과 함께합니다.(오타쿠 아닙니다.) 강릉에 살때 자주먹던 칡칼국수를 가장 좋아했습니다. 지금은 폐업했는지 찾을 수가 없습니다. 칡칼국수도 저의 낭만과 함께하고 있습니다.</p>
-						<p> To be updated... </p>
-				</div>
-				<a href="#two" class="button style2 down anchored">Next</a>
-			</section>
-
-		<!-- Two -->
-			<section id="two" class="main style2 right dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>What I Do</h2>
-					</header>
-					<p>2024년부터 삼성전자에서 PI(프로세스개선) 직무 수행 중입니다.<br>
-						클라우드 기반의 사내 개발 환경을 통해 기획한 PI 과제의 파일럿 시스템도 직접 개발하고 있습니다. 2016년에 현대엔지니어링에서 직장생활을 시작했습니다. 해외 현장 근무 1.5년을 포함하여 전력플랜트 사업관리 직무로 5년을 보냈습니다.<br>
-						업의 특성인지, 불합리하고 비효율적인 업무 방식이 만족스럽지 못했습니다. 건설/플랜트업의 DX(Digital Transformation)에 기여하고 싶었습니다. 그렇게 Python을 마주하면서 사내 DX기술개발 직무로 전환했습니다. 첫 2년간 건설/플랜트업의 데이터를 분석하면서 머신러닝 모델링 과제를 수행했습니다. 개발한 ML모델의 웹 서비스도 동료들에게 도움받으며 함께 개발했습니다. Python Web Framework(Django, Flask)를 다루며 DB모델링, SQL, BI솔루션(Qlik Sense, PowerBI)도 활용할 수 있게 되었습니다.</p>
-						<p> To be updated... </p>
-				</div>
-				<a href="#work" class="button style2 down anchored">Next</a>
-			</section>
-
-		<!-- Work -->
-			<section id="work" class="main style3 primary">
-				<div class="content">
-					<header>
-						<h2>My Work</h2>
-						<p>현재 사내 기존 업무 프로세스의 비효율을 찾아 개선방법을 기획하는 PI 직무 수행 중입니다.<br>
-							As-is To-be 분석을 토대로 시스템 개선 또는 개발에 대한 전반적인 기획이 주요 업무에 해당합니다. 보유한 DX 역량을 토대로 기획한 PI 과제의 파일럿 시스템을 직접 개발하고 있습니다. 시스템 개발을 위한 투자 실효성을 먼저 확인하려는 목적입니다. 사내 클라우드 기반의 개발 환경(DB: DBaaS, WEB/WAS: 자체 클라우드 플랫폼)을 통해 Low-code Development Platform(Mendix)로 웹 기반의 업무 시스템을 AtoZ 직접 기획하고 개발하고 있습니다.</p>
-							<p> To be updated... </p>
-					</header>
-
-					<!-- Gallery  -->
-						<div class="gallery">
-							<article class="from-left">
-								<a href="images/fulls/03.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/03.jpg') }}" title="Air Lounge" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="images/fulls/04.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/04.jpg') }}" title="Carry on" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="images/fulls/05.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/05.jpg') }}" title="The sparkling shell" alt="" /></a>
-							</article>
-						</div>
-				</div>
-			</section>
-
-			<!-- Daily -->
-			<section id="daily" class="main style3 primary">
-				<div class="content">
-					<header>
-						<h2>My Daily</h2>
-						<p>Portfolio로 설명된 부분 외의 저의 일상도 소개합니다.<br> 
-							평범합니다. 쌍둥이 육아, 해외주식투자, 자동차/운전, 자전거(로드), 독서(장르 호불호 심함), 유튜브, 넷플릭스, 만화/애니메이션이 주된 저의 일상입니다. 2020년 결혼 전까지는 Instagram에 일상 사진이 많습니다. 군대를 전역했던 20대 초반(2011년)부터 내가 기억하고 싶은 순간, 좋았던 순간들의 사진/영상을 마음가는대로 업로드했습니다. 일방 소통으로 초월적인 Social Networking을 했습니다. 본 페이지 하단에 Instagram 아이콘으로 확인해주세요.(강요 아닙니다.)</p>
-							<p> To be updated... </p>
-					</header>
-
-					<!-- Gallery  -->
-						<div class="gallery">
-							<article class="from-left">
-								<a href="images/fulls/daily/01.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/daily/01.jpg') }}" title="The Anonymous Red" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="images/fulls/daily/03.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/daily/03.jpg') }}" title="Air Lounge" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="images/fulls/daily/04.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/daily/04.jpg') }}" title="Carry on" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="images/fulls/daily/05.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/daily/05.jpg') }}" title="Air Lounge" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="images/fulls/daily/06.jpg" class="image fit"><img src="{{ url_for('static', filename='images/fulls/daily/06.jpg') }}" title="Carry on" alt="" /></a>
-							</article>
-						</div>
-				</div>
-			</section>
-
-			<!-- Thoughts -->
-			<section id="thoughts" class="main style2 left dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>My Thoughts</h2>
-					</header>
-					<p><strong>과유불급은 인생의 진리 중 하나라고 생각한다.</strong><br>
-						오버아닌가?, 너무한데?, 지나친데?, 그렇게까지?, 너무 나간것 같은데? 같은 생각이 문득 든다면 우선 일시멈춤하려고 노력한다. </p>
-					<p><strong>공홈과 백화점이 정도라고 생각한다.</strong><br>
-						중요하고 고가의 물건일수록 물건의 공식 판매처(온/오프라인)나 백화점 등에서 사는 것이 정도(正道)라고 느껴왔다. 싼건 이유가 있다는 내 아내의 명언과 일맥상통한다. 화장품을 예를들어 설명해보자면, 인터넷 최저가로 구매하면 유통기한을 먼저 확인한다. 테무에서 산 1,000원에 10개짜리 양말은? 양말 모양의 스타킹이었다. 물건이 아니더라도 여행도 마찬가지다. 하얏트월드 가입하고 공홈에서 예약하면, 수많은 중개업체를 통해 예약하는 것과 비슷하거나 오히려 더 저렴할 때도 있었다. 심지어 호텔 멤버십으로서 제공되는 서비스도 더 많았다.(진짜로) 여행하니까 생각이 이어지는데 대한항공 공홈에서 항공권을 구매하면 같은 economy 좌석일지라도 앞쪽이냐 뒷쪽이냐에 따라 금액이 다른걸 직접 확인할 수 있다. 난 해외 파견/출장이 많았던 관계로 소속했던 회사에서 끊어주는 대한항공 economy 석을 많이 경험했다. 회사에서 항공권을 끊어줄 때 보통 economy에서 가장 앞쪽에 비싼 좌석을 준다. business 좌석 업그레이드 경험도 있었다.</p>
-					<p> To be updated... </p>
-				</div>
-			</section>
-
-		<!-- Contact -->
-			<section id="contact" class="main style3 secondary">
-				<div class="content">
-					<header>
-						<h2>Say Hello.</h2>
-						<p>용건이 있다면 보내주세요.</p>
-					</header>
-					<div class="box">
-						<form method="post" action="#">
-							<div class="fields">
-								<div class="field half"><input type="text" name="name" placeholder="Name" /></div>
-								<div class="field half"><input type="email" name="email" placeholder="Email" /></div>
-								<div class="field"><textarea name="message" placeholder="Message" rows="6"></textarea></div>
-							</div>
-							<ul class="actions special">
-								<li><input type="submit" value="Send Message" /></li>
-							</ul>
-						</form>
-					</div>
-				</div>
-			</section>
-
-		<!-- Footer -->
-			<footer id="footer">
-
-				<!-- Icons -->
-				<ul class="icons">
-					<li>
-						<a href="https://www.instagram.com/dlgus/" class="icon brands fa-instagram" target="_blank" rel="noopener noreferrer">
-							<span class="label">Instagram</span>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.linkedin.com/in/hyeon-lee-869824295/" class="icon brands fa-linkedin-in" target="_blank" rel="noopener noreferrer">
-							<span class="label">LinkedIn</span>
-						</a>
-					</li>
-				</ul>
-
-				<!-- Menu -->
-					<ul class="menu">
-						<li>&copy; Hyeon Lee</li><li>Design: <a href="https://html5up.net">HTML5 UP @ajlkn</a></li>
-					</ul>
-
-			</footer>
-
-		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/jquery.poptrox.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-	</body>
-</html>
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function fadeInOnScroll() {
+        document.querySelectorAll('.fadein-on-scroll').forEach(function(el){
+            var rect = el.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 60){
+                el.classList.add('visible');
+            }
+        });
+    }
+    window.addEventListener('scroll', fadeInOnScroll);
+    fadeInOnScroll();
+});
+</script>
+{% endblock %}
