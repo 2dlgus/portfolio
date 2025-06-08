@@ -16,6 +16,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <a href="{{ url_for('new_post') }}" class="btn btn-success mb-3">새 글 작성</a>
             {% for post in posts %}
             <div class="post-preview">
                 <a href="{{ url_for('post', post_id=post.id) }}">
@@ -25,7 +26,7 @@
                     {% endif %}
                 </a>
                 <p class="post-meta">
-                    Latest post: {{ post.date }}
+                    Posted on {{ post.date.strftime('%Y-%m-%d') }}
                 </p>
             </div>
             <hr class="my-4" />
