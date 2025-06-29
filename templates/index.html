@@ -1,5 +1,105 @@
 {% extends "base.html" %}
 {% block title %}Home - HyeonLee.net{% endblock %}
+
+{# 1. block head_extra: meta, style 모두 여기에! (두 번 쓰면 X) #}
+{% block head_extra %}
+    <meta name="google-site-verification" content="Bu2aaxwXZWMkQ8xlrXuUcwjFIFCzYCfzBPIjmwa3fOc" />
+    <meta name="description" content="이현의 개인 홈페이지, 블로그, 포트폴리오 등 다양한 정보 제공">
+    <meta name="keywords" content="이현, HyeonLee, 블로그, 포트폴리오, 데이터분석, 프로세스개선, 쌍둥이 아빠">
+    <style>
+    .menu-card {
+        position: relative;
+        width: 100%;
+        min-height: 220px;
+        height: 25vw;
+        max-height: 330px;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+        display: flex;
+        align-items: stretch;
+        margin: 0 0.7rem;
+        background: #eee;
+        opacity: 0;
+        transform: translateY(48px) scale(0.97);
+        transition:
+            box-shadow 0.26s cubic-bezier(.37,0,.63,1),
+            transform 0.5s cubic-bezier(.37,0,.63,1),
+            opacity 0.7s cubic-bezier(.42,0,.58,1);
+    }
+    .menu-card.visible {
+        opacity: 1;
+        transform: none;
+    }
+    .menu-card:hover,
+    .menu-card:focus,
+    .menu-card.visible:hover {
+        box-shadow: 0 18px 42px rgba(0,0,0,0.17);
+        transform: translateY(-7px) scale(1.025);
+    }
+    .menu-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 0; left: 0;
+        z-index: 1;
+        filter: blur(3.5px) brightness(0.62) grayscale(0.14);
+        transition: filter 0.55s cubic-bezier(.41,0,.69,1);
+    }
+    .menu-card:hover .menu-img,
+    .menu-card:focus .menu-img,
+    .menu-card.visible .menu-img {
+        filter: blur(0) brightness(1.03) grayscale(0);
+    }
+    .menu-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.42);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        opacity: 0;
+        transition: background 0.33s, opacity 0.58s cubic-bezier(.33,0,.67,1);
+    }
+    .menu-card.visible .menu-overlay,
+    .menu-card:hover .menu-overlay,
+    .menu-card:focus .menu-overlay {
+        background: rgba(0,0,0,0.22);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .menu-text {
+        color: #fff;
+        text-align: center;
+        text-shadow: 0 2px 14px rgba(0,0,0,0.34);
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.56s cubic-bezier(.45,0,.55,1), transform 0.56s cubic-bezier(.45,0,.55,1);
+    }
+    .menu-card.visible .menu-text,
+    .menu-card:hover .menu-text,
+    .menu-card:focus .menu-text {
+        opacity: 1;
+        transform: none;
+    }
+    .menu-overlay h3 { font-size: 2.0rem; margin-bottom: 0.7rem; font-weight: 700; }
+    .menu-overlay p { font-size: 1.13rem; margin-bottom:0; }
+    @media (max-width: 991px) {
+        .menu-card { height: 38vw; min-height: 120px; max-height: 210px; margin-bottom: 2rem;}
+    }
+    @media (max-width: 600px) {
+        .menu-card { height: 44vw; min-height: 110px; max-height: 160px;}
+        .menu-overlay h3 { font-size: 1.28rem;}
+        .menu-overlay p { font-size: 0.92rem;}
+    }
+    </style>
+{% endblock %}
+
+{# 2. block content: 본문은 여기에! #}
 {% block content %}
 <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/home-bg.jpg') }}')">
     <div class="container position-relative px-4 px-lg-5">
@@ -58,106 +158,7 @@
 </div>
 {% endblock %}
 
-{% block head_extra %}
-<style>
-.menu-card {
-    position: relative;
-    width: 100%;
-    min-height: 220px;
-    height: 25vw;
-    max-height: 330px;
-    border-radius: 22px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-    display: flex;
-    align-items: stretch;
-    margin: 0 0.7rem;
-    background: #eee;
-    /* 처음엔 흐릿하게 등장 */
-    opacity: 0;
-    transform: translateY(48px) scale(0.97);
-    transition:
-        box-shadow 0.26s cubic-bezier(.37,0,.63,1),
-        transform 0.5s cubic-bezier(.37,0,.63,1),
-        opacity 0.7s cubic-bezier(.42,0,.58,1);
-}
-.menu-card.visible {
-    opacity: 1;
-    transform: none;
-}
-.menu-card:hover,
-.menu-card:focus,
-.menu-card.visible:hover {
-    box-shadow: 0 18px 42px rgba(0,0,0,0.17);
-    transform: translateY(-7px) scale(1.025);
-}
-.menu-img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 1;
-    /* 흐릿+어둡게+흑백 */
-    filter: blur(3.5px) brightness(0.62) grayscale(0.14);
-    transition: filter 0.55s cubic-bezier(.41,0,.69,1);
-}
-/* 활성화될 때 선명하게 */
-.menu-card:hover .menu-img,
-.menu-card:focus .menu-img,
-.menu-card.visible .menu-img {
-    filter: blur(0) brightness(1.03) grayscale(0);
-}
-/* 오버레이+글씨 */
-.menu-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.42);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    /* 글씨도 투명하게 시작 */
-    opacity: 0;
-    transition: background 0.33s, opacity 0.58s cubic-bezier(.33,0,.67,1);
-}
-.menu-card.visible .menu-overlay,
-.menu-card:hover .menu-overlay,
-.menu-card:focus .menu-overlay {
-    background: rgba(0,0,0,0.22);
-    opacity: 1;
-    pointer-events: auto;
-}
-/* 텍스트 등장 애니메이션 */
-.menu-text {
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 2px 14px rgba(0,0,0,0.34);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.56s cubic-bezier(.45,0,.55,1), transform 0.56s cubic-bezier(.45,0,.55,1);
-}
-.menu-card.visible .menu-text,
-.menu-card:hover .menu-text,
-.menu-card:focus .menu-text {
-    opacity: 1;
-    transform: none;
-}
-.menu-overlay h3 { font-size: 2.0rem; margin-bottom: 0.7rem; font-weight: 700; }
-.menu-overlay p { font-size: 1.13rem; margin-bottom:0; }
-@media (max-width: 991px) {
-    .menu-card { height: 38vw; min-height: 120px; max-height: 210px; margin-bottom: 2rem;}
-}
-@media (max-width: 600px) {
-    .menu-card { height: 44vw; min-height: 110px; max-height: 160px;}
-    .menu-overlay h3 { font-size: 1.28rem;}
-    .menu-overlay p { font-size: 0.92rem;}
-}
-</style>
-{% endblock %}
-
+{# 3. block scripts: JS는 여기에! #}
 {% block scripts %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
