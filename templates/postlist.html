@@ -13,25 +13,85 @@
         </div>
     </div>
 </header>
-<div class="container px-4 px-lg-5">
+
+<div class="container px-4 px-lg-5 mt-4">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <a href="{{ url_for('new_post') }}" class="btn btn-success mb-3">새 글 작성</a>
-            {% for post in posts %}
-            <div class="post-preview">
-                <a href="{{ url_for('post', post_id=post.id) }}">
-                    <h2 class="post-title">{{ post.title }}</h2>
-                    {% if post.subtitle %}
-                    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-                    {% endif %}
-                </a>
-                <p class="post-meta">
-                    Posted on {{ post.date.strftime('%Y-%m-%d') }}
-                </p>
+
+            <!-- 새 글 작성 버튼을 왼쪽 정렬 -->
+            <div class="mb-3">
+                <a href="{{ url_for('new_post') }}" class="btn btn-outline-dark">새 글 작성</a>
             </div>
-            <hr class="my-4" />
+
+            {% for post in posts %}
+            <div class="post-preview mb-4 border-bottom pb-3" style="position:relative;">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div style="flex:1;">
+                        <a href="{{ url_for('post', post_id=post.id) }}" class="text-decoration-none">
+                            <h2 class="post-title mb-1" style="font-size:1.4rem;">{{ post.title }}</h2>
+                            {% if post.subtitle %}
+                                <div class="text-muted mb-2" style="font-size:1rem;">{{ post.subtitle }}</div>
+                            {% endif %}
+                            <p class="post-meta mb-0" style="font-size:0.9rem;">Posted on {{ post.date.strftime('%Y-%m-%d') }}</p>
+                        </a>
+                    </div>
+                    <div class="ms-3 d-flex flex-column gap-1 align-items-end">
+                        <a href="{{ url_for('edit_post', post_id=post.id) }}"
+                           class="btn btn-sm"
+                           style="color:#888; font-weight:400; background:none; border:none; padding:2px 8px;">
+                            수정
+                        </a>
+                        <button type="button"
+                                class="btn btn-sm"
+                                style="color:#888; font-weight:400; background:none; border:none; padding:2px 8px;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-post-id="{{ post.id }}" data-post-title="{{ post.title }}">
+                            삭제
+                        </button>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
+<!-- 삭제 모달 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" id="deleteForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">글 삭제 확인</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-post-title" class="mb-3"></p>
+          <input type="password" name="admin_pw" class="form-control" placeholder="관리자 비밀번호 입력" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-outline-dark">삭제</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var deleteModal = document.getElementById('deleteModal');
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var postId = button.getAttribute('data-post-id');
+    var postTitle = button.getAttribute('data-post-title');
+    document.getElementById('modal-post-title').textContent = `"${postTitle}" 글을 삭제하시겠습니까?`;
+    document.getElementById('deleteForm').action = '/post/' + postId + '/delete';
+    document.querySelector('#deleteForm input[name="admin_pw"]').value = "";
+  });
+});
+</script>
 {% endblock %}

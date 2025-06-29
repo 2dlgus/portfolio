@@ -1,25 +1,31 @@
 {% extends "base.html" %}
-{% block title %}새 글 작성 - HyeonLee.net{% endblock %}
+{% block title %}글 수정 - HyeonLee.net{% endblock %}
+
+{% block head_extra %}
+<!-- Toast UI Editor CSS -->
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+{% endblock %}
+
 {% block content %}
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <h2 class="mb-4">새 글 작성</h2>
+            <h2 class="mb-4">글 수정</h2>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                     <div class="alert alert-{{ category }} mt-2">{{ message }}</div>
+                        <div class="alert alert-{{ category }} mt-2">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            <form method="POST" action="{{ url_for('new_post') }}">
+            <form method="POST" action="{{ url_for('edit_post', post_id=post.id) }}">
                 <div class="mb-3">
                     <label for="title" class="form-label">제목</label>
-                    <input type="text" name="title" id="title" class="form-control" required value="{{ title|default('') }}">
+                    <input type="text" name="title" id="title" class="form-control" required value="{{ post.title }}">
                 </div>
                 <div class="mb-3">
                     <label for="subtitle" class="form-label">소제목</label>
-                    <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ subtitle|default('') }}">
+                    <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ post.subtitle }}">
                 </div>
                 <div class="mb-3">
                     <label for="admin_pw" class="form-label">관리자 비밀번호</label>
@@ -28,22 +34,17 @@
                 <div class="mb-3">
                     <label class="form-label">내용</label>
                     <div id="editor"></div>
-                    <input type="hidden" name="content" id="content" value="{{ content|default('') }}">
+                    <input type="hidden" name="content" id="content" value="{{ post.content }}">
                 </div>
                 <div class="mb-3">
                     <label for="bg_image" class="form-label">배경이미지 경로(선택)</label>
-                    <input type="text" name="bg_image" id="bg_image" class="form-control" value="{{ bg_image|default('') }}">
+                    <input type="text" name="bg_image" id="bg_image" class="form-control" value="{{ post.bg_image }}">
                 </div>
                 <button type="submit" class="btn btn-outline-dark">저장</button>
             </form>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block head_extra %}
-<!-- Toast UI Editor CSS -->
-<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 {% endblock %}
 
 {% block scripts %}
@@ -55,12 +56,10 @@ const editor = new toastui.Editor({
   height: '410px',
   initialEditType: 'wysiwyg',
   previewStyle: 'vertical',
-  initialValue: "{{ content|default('')|safe }}"
+  initialValue: "{{ post.content|safe }}"
 });
 
-
-// 폼 제출시 에디터 내용 복사해서 hidden input에 넣기
-document.querySelector('form').addEventListener('submit', function(e){
+document.querySelector('form').addEventListener('submit', function(){
     document.getElementById('content').value = editor.getHTML();
 });
 </script>
