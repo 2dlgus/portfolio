@@ -122,6 +122,11 @@ def edit_post(post_id):
 
     return render_template('edit_post.html', post=post)
 
+# Stock 페이지
+@app.route('/stock')
+def stock():
+    return render_template('stock.html')
+
 # About, Contact 등 기타 페이지
 @app.route('/about')
 def about():
