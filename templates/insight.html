@@ -1,68 +1,114 @@
 {% extends "base.html" %}
-{% block title %}Insight Overview - HyeonLee.net{% endblock %}
+{% block title %}Investment Journey - HyeonLee.net{% endblock %}
+
 {% block content %}
 <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/insight-bg.jpg') }}')">
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <h1>Investment Insight</h1>
-                    <span class="subheading">여기에서 모든 인사이트 기능을 탐색할 수 있어요.</span>
-                </div>
-            </div>
+  <div class="container px-4 px-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Investment Journey</h1>
+          <span class="subheading">단계별로 나만의 투자 전략을 세워보세요</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
+
 <div class="container my-5">
-    <div class="row justify-content-center align-items-stretch">
-        <!-- Macro Insight -->
-        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
-            <a href="{{ url_for('macro') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
-                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/macro-bg.jpg') }}');"></div>
-                <div class="menu-overlay">
-                    <div class="menu-text">
-                        <h3 class="fw-bold">Macro Insight</h3>
-                        <p>거시경제 뉴스와 키워드 흐름 파악</p>
-                    </div>
-                </div>
-            </a>
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+
+      <!-- 인트로 -->
+      <div class="text-center mb-4">
+        <h3 class="fw-bold">📊 단계별 인사이트 설정</h3>
+        <p class="text-muted">아래 단계를 순서대로 진행하면서 나만의 투자 기준과 전략을 완성해보세요.</p>
+      </div>
+
+      <!-- 단계 카드 그룹 -->
+      <div class="row g-3">
+        <!-- 1단계 -->
+        <div class="col-12">
+          <div class="card shadow-sm border-start border-4 border-dark">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">1단계. 투자 목표 설정 및 모의계산</h5>
+                <p class="card-text text-muted small">가장 먼저 우리는 투자금액과 기간, 목표 등을 입력하여 모의계산을 통해 실현가능성을 직관적으로 이해합니다.</p>
+              </div>
+              <a href="{{ url_for('insight_goal') }}" class="btn btn-dark btn-sm text-nowrap">이동</a>
+            </div>
+          </div>
         </div>
-        <!-- Investment Rules -->
-        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
-            <a href="{{ url_for('rules') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
-                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/rules-bg.jpg') }}');"></div>
-                <div class="menu-overlay">
-                    <div class="menu-text">
-                        <h3 class="fw-bold">Investment Rules</h3>
-                        <p>지표 중심의 투자원칙 패키지</p>
-                    </div>
-                </div>
-            </a>
+
+        <!-- 2~6단계 (비활성) -->
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">2단계. 연평균 수익률 기반 투자자 원칙 추천</h5>
+                <p class="card-text text-muted small">나의 목표 수준을 실현했던 대가들의 투자원칙을 공부합니다.</p>
+              </div>
+              <button class="btn btn-sm text-nowrap" disabled>준비 중</button>
+            </div>
+          </div>
         </div>
-        <!-- My Principles -->
-        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
-            <a href="{{ url_for('myprinciples') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
-                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/myprinciples-bg.jpg') }}');"></div>
-                <div class="menu-overlay">
-                    <div class="menu-text">
-                        <h3 class="fw-bold">My Principles</h3>
-                        <p>나만의 기준으로 매수/매도 판단</p>
-                    </div>
-                </div>
-            </a>
+
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">3단계. 나만의 투자 원칙 만들기</h5>
+                <p class="card-text text-muted small">나의 목표와 대가들의 원칙을 참고하면서, 나만의 투자원칙을 쉽고 직관적으로 수립할 수 있습니다.</p>
+              </div>
+              <button class="btn btn-sm text-nowrap" disabled>준비 중</button>
+            </div>
+          </div>
         </div>
-        <!-- ML Prediction -->
-        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
-            <a href="{{ url_for('mlpredict') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
-                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/mlpredict-bg.jpg') }}');"></div>
-                <div class="menu-overlay">
-                    <div class="menu-text">
-                        <h3 class="fw-bold">ML Prediction</h3>
-                        <p>머신러닝 기반 투자 예측 실험</p>
-                    </div>
-                </div>
-            </a>
+
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">4단계. 매수/매도 전략 수립</h5>
+                <p class="card-text text-muted small">재무지표, 기술적분석 등을 쉽고 직관적으로 이해할 수 있게 제공하여, 나만의 투자 원칙과 함께 매수/매도전략을 수립할 수 있습니다.</p>
+              </div>
+              <button class="btn btn-sm text-nowrap" disabled>준비 중</button>
+            </div>
+          </div>
         </div>
+
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">5단계. 관심 종목에 전략 적용</h5>
+                <p class="card-text text-muted small">나만의 투자원칙과 매수/매도전략을 관심종목의 현재주가에 적용해봅니다.</p>
+              </div>
+              <button class="btn btn-sm text-nowrap" disabled>준비 중</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title mb-1">6단계. 머신러닝 예측 결과 참고</h5>
+                <p class="card-text text-muted small">ML예측모델로 앞선 판단에 확신을 더해보세요.</p>
+              </div>
+              <button class="btn btn-sm text-nowrap" disabled>준비 중</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 참고 섹션 -->
+      <div class="mt-5 text-center">
+        <h5 class="fw-bold">📚 참고 자료</h5>
+        <p class="text-muted">거시경제 뉴스, 키워드, 섹터 트렌드 등은 아래 페이지에서 확인할 수 있어요.</p>
+        <a href="{{ url_for('macro') }}" class="btn btn-outline-dark">거시경제 인사이트 보기</a>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}

@@ -35,6 +35,10 @@ class Post(db.Model):
     def __repr__(self):
         return f"<Post {self.title}>"
 
+@app.template_filter('format_number')
+def format_number(value):
+    return f"{int(value):,}"
+
 # 홈(메인)
 @app.route('/')
 def index():
@@ -122,10 +126,74 @@ def edit_post(post_id):
 
     return render_template('edit_post.html', post=post)
 
-# Stock 페이지
+# Insight 페이지
 @app.route("/insight")
 def insight():
     return render_template("insight.html")
+
+@app.route('/insight/goal', methods=['GET', 'POST'])
+def insight_goal():
+    result = None
+
+    if request.method == 'POST':
+        try:
+            principal = float(request.form['principal'])
+            monthly = float(request.form['monthly'])
+            target_amount = float(request.form.get('target_amount') or 0)
+            expected_return = float(request.form.get('expected_return') or 0)
+            years = int(request.form['years'])
+            purpose = request.form.get('purpose', '')
+
+            # 입력 유효성
+            if not expected_return and not target_amount:
+                flash("목표 금액 또는 수익률 중 하나는 필수입니다.", "danger")
+                return redirect(url_for('insight_goal'))
+
+            if not expected_return and target_amount:
+                expected_return = 100 * ((target_amount / (principal + monthly * 12 * years)) ** (1/years) - 1)
+            elif not target_amount and expected_return:
+                target_amount = principal * ((1 + expected_return / 100) ** years)
+                for i in range(1, years + 1):
+                    target_amount += monthly * 12 * ((1 + expected_return / 100) ** (years - i))
+
+            # 수익률 기준 종목 추천
+            etf_data = {
+                "VOO": 12.2,
+                "QQQ": 16.5,
+                "SPY": 11.8,
+                "ARKK": 23.1
+            }
+
+            stock_data = {
+                "AAPL": 17.2,
+                "META": 18.0,
+                "TSLA": 27.3,
+                "JNJ": 8.3
+            }
+
+            def closest_match(data, value):
+                return min(data.items(), key=lambda x: abs(x[1] - value))
+
+            etf_match = closest_match(etf_data, expected_return)
+            stock_match = closest_match(stock_data, expected_return)
+
+            result = {
+                'principal': principal,
+                'monthly': monthly,
+                'target_amount': round(target_amount),
+                'expected_return': round(expected_return, 1),
+                'years': years,
+                'purpose': purpose,
+                'etf': etf_match,
+                'stock': stock_match,
+            }
+
+        except Exception as e:
+            flash("입력값을 확인해주세요.", "danger")
+            print("🔴 Error:", e)
+            return redirect(url_for('insight_goal'))
+
+    return render_template('insight_goal.html', result=result)
 
 @app.route("/macro")
 def macro():
