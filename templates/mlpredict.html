@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}ML Prediction - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/mlpredict-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>ML Prediction</h1>
+                    <span class="subheading">머신러닝 기반 투자 예측 실험</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-5 text-center">
+    <p>🤖 투자원칙 변수 기반 예측 모델 (예: 회귀모델 등)</p>
+    <p>📌 참고 지표로만 제공하며 계속 개선됩니다</p>
+    <p>🚧 연구 개발 중입니다!</p>
+</div>
+{% endblock %}

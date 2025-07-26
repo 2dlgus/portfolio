@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Macro Insight - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/macro-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Macro Insight</h1>
+                    <span class="subheading">전세계 경제 이슈를 직관적으로 시각화</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-5 text-center">
+    <p>📈 매주 업데이트되는 주요 경제 키워드</p>
+    <p>📰 뉴스 링크, 워드클라우드, 테마 추적 기능 제공 예정</p>
+    <p>🚧 준비 중입니다. 조만간 오픈됩니다!</p>
+</div>
+{% endblock %}

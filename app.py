@@ -123,9 +123,25 @@ def edit_post(post_id):
     return render_template('edit_post.html', post=post)
 
 # Stock 페이지
-@app.route('/stock')
-def stock():
-    return render_template('stock.html')
+@app.route("/insight")
+def insight():
+    return render_template("insight.html")
+
+@app.route("/macro")
+def macro():
+    return render_template("macro.html")
+
+@app.route("/rules")
+def rules():
+    return render_template("rules.html")
+
+@app.route("/myprinciples")
+def myprinciples():
+    return render_template("myprinciples.html")
+
+@app.route("/mlpredict")
+def mlpredict():
+    return render_template("mlpredict.html")
 
 # About, Contact 등 기타 페이지
 @app.route('/about')

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Insight Overview - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/insight-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Investment Insight</h1>
+                    <span class="subheading">여기에서 모든 인사이트 기능을 탐색할 수 있어요.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-5">
+    <div class="row justify-content-center align-items-stretch">
+        <!-- Macro Insight -->
+        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
+            <a href="{{ url_for('macro') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/macro-bg.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">Macro Insight</h3>
+                        <p>거시경제 뉴스와 키워드 흐름 파악</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Investment Rules -->
+        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
+            <a href="{{ url_for('rules') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/rules-bg.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">Investment Rules</h3>
+                        <p>지표 중심의 투자원칙 패키지</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- My Principles -->
+        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
+            <a href="{{ url_for('myprinciples') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/myprinciples-bg.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">My Principles</h3>
+                        <p>나만의 기준으로 매수/매도 판단</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- ML Prediction -->
+        <div class="col-12 col-md-6 col-lg-6 mb-4 d-flex">
+            <a href="{{ url_for('mlpredict') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+                <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/mlpredict-bg.jpg') }}');"></div>
+                <div class="menu-overlay">
+                    <div class="menu-text">
+                        <h3 class="fw-bold">ML Prediction</h3>
+                        <p>머신러닝 기반 투자 예측 실험</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

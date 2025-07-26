@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Investment Principles - HyeonLee.net{% endblock %}
+{% block content %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/myprinciples-bg.jpg') }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>My Principles</h1>
+                    <span class="subheading">나만의 투자 기준으로 종목을 점검</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container my-5 text-center">
+    <p>🧮 관심 종목의 매수/매도 타이밍 판단 자동화</p>
+    <p>✅ 내가 정한 기준으로 체크리스트 확장</p>
+    <p>🚧 구현 중입니다. 곧 만나요!</p>
+</div>
+{% endblock %}

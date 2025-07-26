@@ -25,7 +25,17 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('postlist') }}">Post</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('stock') }}">Stock</a></li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInsight" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Insight
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarInsight">
+                        <li><a class="dropdown-item" href="{{ url_for('macro') }}">Macro Insight</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('rules') }}">Investment Rules</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('myprinciples') }}">My Principles</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('mlpredict') }}">ML Prediction</a></li>
+                    </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
                 </ul>
             </div>
@@ -56,7 +66,6 @@
                     <ul class="list-inline">
                         <li class="list-inline-item"><a href="https://www.instagram.com/dlgus/"><i class="fab fa-instagram fa-lg"></i></a></li>
                         <li class="list-inline-item"><a href="https://www.linkedin.com/in/hyeon-lee-869824295/"><i class="fab fa-linkedin fa-lg"></i></a></li>
-                        <li class="list-inline-item"><a href="https://github.com/2dlgus/portfolio.git"><i class="fab fa-github fa-lg"></i></a></li>
                     </ul>
                     <div class="small text-muted fst-italic">Copyright &copy; HyeonLee.net 2025</div>
                 </div>

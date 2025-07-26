@@ -117,7 +117,7 @@
 <div class="container my-5">
     <div class="row justify-content-center align-items-stretch">
         <!-- About 카드 -->
-        <div class="col-12 col-lg-4 mb-4 d-flex">
+        <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex">
             <a href="{{ url_for('about') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
                 <div class="menu-img"
                     style="background-image:url('{{ url_for('static', filename='assets/img/about-icon.jpg') }}');"></div>
@@ -130,7 +130,7 @@
             </a>
         </div>
         <!-- Post 카드 -->
-        <div class="col-12 col-lg-4 mb-4 d-flex">
+        <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex">
             <a href="{{ url_for('postlist') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
                 <div class="menu-img"
                     style="background-image:url('{{ url_for('static', filename='assets/img/postlist-icon.jpg') }}');"></div>
@@ -142,21 +142,20 @@
                 </div>
             </a>
         </div>
-        <!-- Stock 카드 -->
-        <div class="col-12 col-lg-4 mb-4 d-flex">
-            <a href="{{ url_for('stock') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
-                <div class="menu-img"
-                    style="background-image:url('{{ url_for('static', filename='assets/img/stock-bg.jpg') }}');"></div>
-                <div class="menu-overlay">
-                    <div class="menu-text">
-                        <h3 class="fw-bold">Stock</h3>
-                        <p>주식과 나, 아이디어 구현</p>
-                    </div>
-                </div>
-            </a>
+        <!-- Insight 카드 -->
+        <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex">
+        <a href="{{ url_for('macro') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
+            <div class="menu-img" style="background-image:url('{{ url_for('static', filename='assets/img/insight-bg.jpg') }}');"></div>
+            <div class="menu-overlay">
+            <div class="menu-text">
+                <h3 class="fw-bold">Insight</h3>
+                <p>투자를 쉽게, 본인의 원칙을 세워서</p>
+            </div>
+            </div>
+        </a>
         </div>
         <!-- Contact 카드 -->
-        <div class="col-12 col-lg-4 mb-4 d-flex">
+        <div class="col-12 col-md-6 col-lg-3 mb-4 d-flex">
             <a href="{{ url_for('contact') }}" class="menu-card flex-fill text-decoration-none fadein-on-scroll">
                 <div class="menu-img"
                     style="background-image:url('{{ url_for('static', filename='assets/img/contact-icon.jpg') }}');"></div>
